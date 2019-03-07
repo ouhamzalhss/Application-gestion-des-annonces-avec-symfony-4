@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Edition d'une nouvelle annonce ! {% endblock %}
+
+{#% form_theme form _self %#}
+{% form_theme form 'ad/_collection.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+        <h1> Modifier l'annonce {{ ad.title }} </h1>
+
+        {{ form_start(form) }}
+
+        {{ form_widget(form) }}
+        
+        <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+
+        {{ form_end(form) }}
+    </div>
+    
+{% endblock %}
+
+
+
+
+{% block javascripts %}
+
+<script>
+   $('#add-image').click(function(){
+        // je recupere lindex des champs que je vais inserer
+        const index = +$('#counter').val();
+        // je recupere le protype des entrees
+        const templ = $('#ad_images').data('prototype').replace(/_name_/g,index);
+        // j'injecte ce code au sein de div
+        $('#ad_images').append(templ);
+
+        $('#counter').val(index + 1);
+
+        handledelete();
+    });
+
+    function handledelete(){
+        $('button[data-action="delete"]').click(function(){
+            const target = this.dataset.target;
+            $(target).remove();
+        });
+    }
+    // Permet de mise a jour le compte des images 
+    function updateCounter(){
+        const count = +$('#ad_images div.form-group').length;
+        $('#counter').val(count);
+    }
+
+    handledelete();
+    updateCounter();
+</script>
+
+{% endblock %} 

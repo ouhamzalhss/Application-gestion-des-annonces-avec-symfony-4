@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Création d'une nouvelle annonce ! {% endblock %}
+
+
+{#% form_theme form _self %#}
+{% form_theme form 'ad/_collection.html.twig' %}
+
+
+{% block body %}
+
+{# Afficher le sous formulaire principale (ad) #}
+    <div class="container">
+        <h1> Création d'une nouvelle annonce ! </h1>
+
+        {{ form_start(form) }}
+
+        <div class="row">
+
+            <div class="col">
+                <div class="alert alert-light">
+                    <h2 class="alert-heading">Informations générales</h2>
+                       {{ form_row(form.title) }}
+                       {{ form_row(form.slug) }}
+                       {{ form_row(form.price) }}
+                       {{ form_row(form.rooms) }}
+                </div>
+                <div class="alert alert-light">
+                      <h2 class="alert-heading">Détailes de l'annonce</h2>
+                      {{ form_row(form.introduction)}}
+                      {{ form_row(form.content)}}
+                </div>
+            </div>
+            <div class="col">
+                 <div class="alert alert-light">
+                     <h2 class="alert-heading">Image de l'annonce</h2>
+                      {{ form_row(form.coverImage) }}
+                      {{ form_row(form.images)}}
+                 </div>
+            </div>
+        
+        </div>
+        
+        <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> Créer la nouvelle annonce</button>
+
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}
+
+
+
+
+{% block javascripts %}
+
+{# <script src="{{ asset('build/js/ad.js') }}"></script> #}
+
+<script>
+   $('#add-image').click(function(){
+        // je recupere lindex des champs que je vais inserer
+        const index = +$('#counter').val();
+        // je recupere le protype des entrees
+        const templ = $('#ad_images').data('prototype').replace(/_name_/g,index);
+        // j'injecte ce code au sein de div
+        $('#ad_images').append(templ);
+
+        $('#counter').val(index + 1);
+
+        handledelete();
+    });
+
+    function handledelete(){
+        $('button[data-action="delete"]').click(function(){
+            const target = this.dataset.target;
+            $(target).remove();
+        });
+    }
+    // Permet de mise a jour le compte des images 
+    function updateCounter(){
+        const count = +$('#ad_images div.form-group').length;
+        $('#counter').val(count);
+    }
+
+    handledelete();
+    updateCounter();
+</script>
+
+{% endblock %}

@@ -1,0 +1,145 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %} Edition d'une nouvelle annonce ! {% endblock %}
+
+{% form_theme form _self %}
+{#% form_theme form 'ad/_collection.html.twig' %#}
+
+{% block body %}
+     <div class="container">
+        <h1 class="my-5"> Modifier l'annonce {{ ad.title }} </h1>
+
+        {{ form_start(form) }}
+        <div class="row">
+            <div class="col">
+                <div class="card bg-light">
+                   <div class="card-header">
+                        <div class="card-title">Modification de l'annonce</div>
+                   </div>
+                   <div class="card-body">
+                        {{ form_widget(form) }}
+                           <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+
+                        {{ form_end(form) }}
+                   </div>
+                </div>
+            </div>
+            <div class="col">
+                 <div class="card bg-light">
+                   <div class="card-header">
+                        <div class="card-title">Les réservations </div>
+                   </div>
+                   <div class="card-body">
+                        <table class="table table-hover">
+                         <thead>
+                             <tr>
+                                 <th>ID</th>
+                                 <th>Voyageur</th>
+                                 <th>Date de réservation</th>
+                                 <th>Actions</th>
+                             </tr>
+                         </thead>
+                         <tbody>
+
+                            {% for booking in ad.bookings %}
+                                <tr>
+                                    <td>{{ booking.id }}</td>
+                                    <td>{{ booking.booker.fullName }}</td>
+                                    <td>{{ booking.createdAt | date('d/m/Y') }}</td>
+                                    <td>
+                                       <a href="#" class="btn btn-primary"> <i class="fas fa-eye"></i> </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+
+                         </tbody>
+                        </table>
+                   </div>
+                </div>
+                 <div class="card bg-light">
+                   <div class="card-header">
+                        <div class="card-title">Les commentaires </div>
+                   </div>
+                   <div class="card-body">
+                        <table class="table table-hover">
+                         <thead>
+                             <tr>
+                                 <th>ID</th>
+                                 <th>Autheur</th>
+                                 <th>Note</th>
+                                 <th>Commentaire</th>
+                                 <th>Actions</th>
+                             </tr>
+                         </thead>
+                         <tbody>
+
+                            {% for comment in ad.comments %}
+                                <tr>
+                                    <td>{{ comment.id }}</td>
+                                    <td>{{ comment.author.fullName }}</td>
+                                    <td>{{ comment.rating }}</td>
+                                    <td>{{ comment.content }}</td>
+                                    <td>
+                                       <a href="#" class="btn btn-primary"> <i class="fas fa-eye"></i> </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+
+                         </tbody>
+                        </table>
+                   </div>
+                </div>
+            </div>
+        </div>
+         
+    </div>
+
+{% endblock %}
+
+
+
+{% block javascripts %}
+
+<script src="/js/ad.js"></script>
+
+{% endblock %}
+
+
+
+
+
+{# Afficher le sous formulaire images #}
+{% block _ad_images_widget %}
+    <div class="form-group">
+       {{ form_widget(form)}}
+    </div>
+{% endblock %}
+
+
+{# Cacher les label de sous formulaire images #}
+{% block _ad_images_entry_row %}
+       {{form_widget(form)}}
+{% endblock %}
+
+
+{# Redifinition de style de sous formulaire images #}
+{% block _ad_images_entry_widget %}
+   <div class="form-group" id="block_{{id}}">
+        <div class="row">
+            <div class="col-md-10">
+                <div class="row">
+                
+                    <div class="col"> 
+                        {% if value %}
+                           <img src="{{ value.url }}" width="44" height="44" >
+                        {% endif %}
+                    </div>
+                    <div class="col">{{ form_widget(form.caption)}}</div>
+                </div>
+            </div>
+            <div class="col-md-2">
+               <button type="button" data-action="delete" data-target="#block_{{id}}" class="btn btn-danger">X</button>
+            </div>
+        </div>
+   </div>
+{% endblock %}

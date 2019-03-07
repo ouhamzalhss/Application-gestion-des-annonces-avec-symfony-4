@@ -1,0 +1,62 @@
+@import url('./bootstrap.min.css');
+
+div.add-image {
+    padding: 3em;
+    background-size: cover;
+}
+
+div.add-image h1, div.add-image p {
+    color: white;
+    text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+}
+
+div.add-image .btn{
+    margin-top: 2em;
+    font-size: 1.5em;
+    line-height: 1.5em;
+}
+.alert a{
+    text-decoration: none;
+}
+div.container,div.container-fluid{
+    margin-top: 20px;
+}
+
+div.carousel-caption{
+   text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+}
+.avatar{
+    max-width: 138px;
+    max-height: 138px;
+    border-radius: 50%;
+
+    &.avatar-mini{
+        max-width: 40px;
+        max-height: 40px;
+    }
+
+    &.avatar-medium{
+        max-width: 60px;
+        max-height: 80px;
+    }
+
+    &.avatar-micro{
+        max-width: 35px;
+        max-height: 35px;
+    }
+}
+
+
+
+
+
+table tr td.disabled, .datepicker table tr td.disabled:hover {
+ color: red !important;
+}
+
+span.rating i {
+    color : goldenrod;
+}
+.btn {
+    color: white !important;
+}

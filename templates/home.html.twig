@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Bienvenue dans le meilleur reseau d'appartement!
+{% endblock %}
+
+
+{% block body %}
+  <div class="container">
+        <div class="jumbotron mt-3">
+            <h1 class="display-3">Bienvenue sur SymBNB!</h1>
+            <p class="lead">Nous mettons en relation les voyageurs et les proprietaires qui veulent profiter d'opportunities
+            et gagner de l'argent en proposant leur bien à la location</p>
+            <hr class="my-4">
+            <p>Vous etes voyageurs ? Et vous voulez voir ou vous pourrez loger pour votre prochaine deplacement ? .</p>
+            <p class="lead">
+                <a class="btn btn-primary btn-lg" href="{{path('ads_index')}}" role="button">Voir nos annonces</a>
+            </p>
+        </div>
+
+
+        <h2 class="h1 my-5" >Nos appartements stars</h2>
+        <div class="row">
+           
+           {% for data in ads %}
+               {% include "ad/_ad.html.twig" with {'ad': data.annonce} %}
+           {% endfor %}
+        </div>
+
+        <h2 class="h1 my-5" >Nos proprietaires stars</h2>
+        <div class="row">
+
+        {% for data in users %}
+            <div class="col mb-3">
+                <div class="card border-secondary">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                             {{ data.user.fullName }} 
+                        </h4>
+                        
+                        <hr>
+
+                        <div class="card-text">
+                            <img src="{{data.user.picture}}" alt="Image de {{ data.user.fullName }}" class="float-left mr-3">
+                            <p>{{data.user.introduction}}</p>
+                            <a href="{{ path('user_show',{'slug': data.user.slug })}}" class="btn btn-success float-right"> En savoir plus</a>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+
+        {% endfor %}
+
+        </div>
+    </div>
+{% endblock %}

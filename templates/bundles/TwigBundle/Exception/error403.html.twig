@@ -1,0 +1,14 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Vous n'avez pas le droit de faire ça  {% endblock %}
+
+
+{% block body %}
+    <div class="container">
+        <h1>Alors ! Vous essayer de bousiler le site !</h1>
+        <p>Vous n'avez pas le droit de faire ça, Contacter l'administrateur de site</p>
+        <p>{{exception.message}}</p>
+        <a href="{{path('homepage')}}" class="btn btn-primary">Accueil</a>
+        <a href="{{path('ads_index')}}" class="btn btn-success">Nos annonces</a>
+    </div>
+{% endblock %}

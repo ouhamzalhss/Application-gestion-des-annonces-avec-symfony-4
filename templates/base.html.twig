@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>SymBNB - {% block title %}Welcome!{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+        {# <link rel="stylesheet" href="/css/bootstrap.min.css" >   #}
+        <link rel="stylesheet" href="{{ asset('build/css/app.css') }}" >  
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+     
+        {% include 'partials/header.html.twig' %}
+            
+        {% block body %}{% endblock %}
+      
+        {% include 'partials/footer.html.twig' %}
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+        <script src="{{ asset('build/js/app.js') }}"></script>
+
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

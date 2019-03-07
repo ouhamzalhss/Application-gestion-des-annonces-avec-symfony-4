@@ -1,0 +1,39 @@
+
+{# Afficher le sous formulaire images #}
+{% block _ad_images_widget %}
+     <p>Ici vous pouvez ajouter votre propre images</p>
+    <div class="form-group">
+       {{ form_widget(form)}}
+
+       <input type="hidden" id="counter" value="0">
+    </div>
+    <div class="form-group">
+       <button type="button" class="btn btn-primary" id="add-image">
+         <i class="fas fa-plus"></i> Ajouter une image
+       </button>
+    </div>
+{% endblock %}
+
+
+{# Cacher les label de sous formulaire images #}
+{% block _ad_images_entry_row %}
+   {{form_widget(form)}}
+{% endblock %}
+
+
+{# Redifinition de style de sous formulaire images #}
+{% block _ad_images_entry_widget %}
+   <div class="form-group" id="block_{{id}}">
+        <div class="row">
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col">{{ form_widget(form.url)}}</div>
+                    <div class="col">{{ form_widget(form.caption)}}</div>
+                </div>
+            </div>
+            <div class="col-md-2">
+               <button type="button" data-action="delete" data-target="#block_{{id}}" class="btn btn-danger">X</button>
+            </div>
+        </div>
+   </div>
+{% endblock %}

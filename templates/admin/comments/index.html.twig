@@ -1,0 +1,46 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Administration des commentaires!{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+      <h2 class="my-5">Administration des commentaires! </h2>
+        <table class="table table-hover">
+             <thead>
+                 <tr>
+                    <th>Date</th>
+                    <th>Author</th>
+                    <th>commentaire</th>
+                    <th>Annonce</th>
+                    <th>Note</th>
+                    <th>Actions</th>
+                 </tr>
+             </thead>
+             <tbody>
+                {% for comment in paginator.data %}
+                 <tr>
+                    <td nowrap="">{{ comment.createdAt | date('d/m/Y H:i') }}</td>
+                    <td nowrap="">
+                    <img src="{{ comment.author.picture }}" alt="avatar de {{ comment.author.fullName }}" class="avatar avatar-micro mr-2">
+                        {{ comment.author.fullName }}
+                    </td>
+                    <td>{{ comment.content }}</td>
+                    <td>{{ comment.ad.title }}</td>
+                    <td nowrap="">
+                       {% include 'partials/rating.html.twig' with {'rating': comment.rating} %}
+                    </td>
+                    <td nowrap="">
+                        <a href="{{ path('admin_comment_edit', {'id':comment.id }) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                        <a href="{{ path('admin_comment_delete',{'id':comment.id }) }}" class="btn btn-danger" onclick=" return confirm('étes vous sûr de supprimer ce commentaire')"><i class="fas fa-trash"></i></a>
+                    </td>
+                 </tr>
+                {% endfor %}
+             </tbody>
+        </table>
+   
+        {{ paginator.display }}
+
+    </div>
+
+{% endblock %}
+
