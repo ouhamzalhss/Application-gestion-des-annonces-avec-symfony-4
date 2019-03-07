@@ -90,6 +90,11 @@ class Ad
      */
     private $comments;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $createdAt;
+
   
 
     public function __construct()
@@ -349,6 +354,18 @@ class Ad
                 $comment->setAd(null);
             }
         }
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(?\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
         return $this;
     }
     
